@@ -9,10 +9,13 @@ from bot import Bot
 # CORS(APP)
 
 bot = Bot("joan")
-answer = bot.message("Gipsy, ponte firme")
-print(answer)
-answer = bot.message("ahora salúdame")
-print(answer)
+answer = bot.message("Hola Gipsy")
+answer = bot.message("sube el brazo 30 grados")
+answer = bot.message("baja el brazo veinte grados")
+answer = bot.message("avanza 10 cms")
+answer = bot.message("retrocede 4 metros")
+
+#un poco más, más, mucho más (30)
 
 # @APP.route('/', methods=['GET'])
 # def main():

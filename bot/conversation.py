@@ -24,7 +24,7 @@ class Interaction(object):
         if self.intent:
             message += str(self.intent) + "\n"
         if self.entities:
-            message += "[" + "".join(map(str, self.entities)) + "]\n"
+            message += "[" + ", ".join(map(str, self.entities)) + "]\n"
         if self.status_start and self.status_end:
             message += self.status_start + " -> " + self.status_end + "\n"
         if self.action and self.answer:
