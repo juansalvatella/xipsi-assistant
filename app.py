@@ -1,19 +1,25 @@
-"""
-"""
-# from flask import Flask, jsonify, request
-# from flask_cors import CORS
+from bot.core import Bot, BotConfig
 
-from bot import Bot
+bot = Bot(config=BotConfig(name="Jarvis"))
+bot.start_conversation(id="1")
 
-# APP = Flask(__name__)
-# CORS(APP)
+answer = bot.message("Hola guapo")
+answer = bot.message("Cómo te llamas?")
+answer = bot.message("Yo soy Joan")
 
-bot = Bot("joan")
-answer = bot.message("Hola Gipsy")
-answer = bot.message("sube el brazo 30 grados")
-answer = bot.message("baja el brazo veinte grados")
-answer = bot.message("avanza 10 cms")
-answer = bot.message("retrocede 4 metros")
+
+
+# for query in speech_recognition():
+#     bot.message(query)
+#     bot.face_detection()
+#     bot.speech_detection()
+
+# answer = bot.message("Sí")
+
+# answer = bot.message("sube el brazo 30 grados")
+# answer = bot.message("baja el brazo veinte grados")
+# answer = bot.message("avanza 10 cms")
+# answer = bot.message("retrocede 4 metros")
 
 #un poco más, más, mucho más (30)
 

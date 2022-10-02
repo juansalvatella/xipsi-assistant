@@ -1,31 +1,34 @@
-"""
-"""
+from enum import Enum
+from bot.core import BotConfig
 
-class Message(object):
-    def __init__(self, value, _type="text"):
-        self.value = value
-        self.type = _type
+from bot.conversation import Conversation
 
-    def __repr__(self):
-        if self.type == "text":
-            return self.value
-        elif self.type == "image":
-            return "image='{}'>".format(self.value)
-        elif self.type == "v-card":
-            return "contact='{}'>".format(self.value)
+class ActionEnum(str, Enum):
+    GREET = "GREET"
+    MEET_MASTER = "MEET_MASTER"
+    NOT_UNDERSTAND = "NOT_UNDERSTAND"
+    ASK_NAME = "ASK_NAME"
+    NICE_TO_MEET_YOU = "NICE_TO_MEET_YOU"
 
-class Answer(object):
-    def __init__(self, message):
-        self.messages = [message]
-    
-    def add(self, message):
-        self.messages.append(message)
+def reply(config: BotConfig, action: ActionEnum, conversation: Conversation) -> str:
+    if action == ActionEnum.GREET:
+        return "¡Hola! Encantado"
+    elif action == ActionEnum.MEET_MASTER:
+        return "¿Eres mi maestro?"
+    elif action == ActionEnum.ASK_NAME:
+        return f"Me llamo {config.name}, y tu?"
+    elif action == ActionEnum.NICE_TO_MEET_YOU:
+        return f"Pues encantado de conocerte {conversation.context.speaker_name}"
+    return "No te he entendido"
 
-    def __repr__(self):
-        return "; ".join(map(str, self.messages))
 
-def reply(action, conversation=None):
-    return None
+def _greet(conversation: Conversation) -> str:
+    if conversation.context.master_recognized is not None:
+        speaker_name = conversation.context.master_recognized.name
+    else:
+        speaker_name = "plebeyo"
+    return f"Hola {speaker_name}! Encantado de saludarte de nuevo"
+
 
 class InvalidAction(Exception):
     pass

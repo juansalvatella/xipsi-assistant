@@ -1,4 +1,6 @@
 import re
+from pydantic import BaseModel
+from typing import Any, List, Optional
 
 #TODO: Add pint library https://pint.readthedocs.io/en/stable/
 
@@ -25,16 +27,9 @@ AXIS_Z = "(" + DIRECTION_Z_NEG + "|" + DIRECTION_Z_POS + ")"
 DIRECTION_POS = "(" + DIRECTION_X_POS + "|" + DIRECTION_Y_POS + "|" + DIRECTION_Z_POS + ")"
 DIRECTION_NEG = "(" + DIRECTION_X_NEG + "|" + DIRECTION_Y_NEG + "|" + DIRECTION_Z_NEG + ")"
 
-class Entity(object):
-    def __init__(self, name, value=None):
-        self.name = name
-        self.value = value
-
-    def __repr__(self):
-        message = "Entity(" + self.name
-        if self.value:
-            message += ", \"" + str(self.value) + "\""
-        return  message + ")"
+class Entity(BaseModel):
+    name: str
+    value: Any
 
 class UnitEntity(Entity):
     def __init__(self, *args, amount=1, units=None):
@@ -180,6 +175,15 @@ def _extract_direction(query):
     m = re.search(DIRECTION_NEG, query)
     if m:
         return -1
+
+def _extract_name(word_list: List[str]) -> Optional[str]:
+    if "gerard" in word_list:
+        return "Gerard"
+    if "juan" in word_list:
+        return "Juan"
+    if "joan" in word_list:
+        return "Joan"
+    return None
 
 
 def extract_other(query):
