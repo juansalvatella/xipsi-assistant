@@ -10,7 +10,7 @@ import string
 import numpy as np
 import base64
 
-openai.api_key = "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"
+openai.api_key = ""
 
 CHUNK = 1024  # number of audio samples per frame
 FORMAT = pyaudio.paInt16  # audio format
